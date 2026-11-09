@@ -189,6 +189,7 @@
             <option value="kjpx-aa">K-JPX-A(A)</option>
             <option value="scbsp500a">SCBS&amp;P500A</option>
             <option value="scbrmdigi-a">SCBRMDIGI(A)</option>
+            <option value="k-usxndq-aa">K-USXNDQ-A(A)</option>
           </select>
         </div>
         <h1 id="page-title">SCBNK225</h1>
@@ -275,7 +276,7 @@
     </aside>
 
     <footer>
-      <span>SCBNK225, K-JPX-A(A), SCBS&amp;P500A และ SCBRMDIGI(A) ดึง NAV จาก SEC เมื่อกดอัปเดต</span>
+      <span>SCBNK225, K-JPX-A(A), SCBS&amp;P500A, SCBRMDIGI(A) และ K-USXNDQ-A(A) ดึง NAV จาก SEC เมื่อกดอัปเดต</span>
       <span>ข้อมูลส่วนตัวจัดเก็บในเบราว์เซอร์บนอุปกรณ์นี้</span>
     </footer>
   </main>
@@ -330,6 +331,19 @@
           defaults: {
             units: "6458.7535",
             average: "16.7214",
+            currentPrice: "",
+            buyAmount: "0",
+            buyPrice: ""
+          }
+        },
+        "k-usxndq-aa": {
+          name: "K-USXNDQ-A(A)",
+          storageKey: "k-usxndq-aa-calculator-v1",
+          reportedCost: 10000,
+          apiFundId: "k-usxndq-aa",
+          defaults: {
+            units: "285.2432",
+            average: "35.0578",
             currentPrice: "",
             buyAmount: "0",
             buyPrice: ""
@@ -514,7 +528,7 @@
         document.getElementById("page-title").textContent = activeFund.name;
         navButton.hidden = !activeFund.apiFundId;
         navStatus.className = "nav-status";
-        navStatus.textContent = "กดเพื่อดึง NAV ล่าสุดจาก SEC";
+        navStatus.textContent = activeFund.apiFundId ? "กดเพื่อดึง NAV ล่าสุดจาก SEC" : "กรอก NAV ปัจจุบันด้วยตนเอง";
         output("save-status").textContent = "ค่าที่แก้จะบันทึกไว้ในเครื่อง";
         try {
           localStorage.setItem(selectedFundKey, activeFundId);
@@ -556,7 +570,7 @@
       load();
       document.getElementById("page-title").textContent = activeFund.name;
       navButton.hidden = !activeFund.apiFundId;
-      navStatus.textContent = "กดเพื่อดึง NAV ล่าสุดจาก SEC";
+      navStatus.textContent = activeFund.apiFundId ? "กดเพื่อดึง NAV ล่าสุดจาก SEC" : "กรอก NAV ปัจจุบันด้วยตนเอง";
       render();
 
       if ("serviceWorker" in navigator && location.protocol !== "file:") {

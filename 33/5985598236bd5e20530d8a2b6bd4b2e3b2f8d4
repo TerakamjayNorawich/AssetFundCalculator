@@ -1,0 +1,22 @@
+.gitignore
+  h_2a958ada244ba1 1
+index.html
+  h_2a958ada244ba1 1-570
+manifest.webmanifest
+  h_2a958ada244ba1 1-28
+server.js
+  h_2a958ada244ba1 1-203
+service-worker.js
+  h_2a958ada244ba1 1-51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.3",
+  "base_commit_sha": "335985598236bd5e20530d8a2b6bd4b2e3b2f8d4",
+  "prompts": {},
+  "humans": {
+    "h_2a958ada244ba1": {
+      "author": "Norawich Terakamjay <norawich.ter@axonstech.com>"
+    }
+  }
+}

@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#123d35">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ทุนเฉลี่ย 225">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <title>SCBNK225 | คำนวณต้นทุนเฉลี่ย</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #15362f;
+      --muted: #647a73;
+      --line: #d7e2dc;
+      --paper: #f2f6f2;
+      --surface: #fbfcf9;
+      --forest: #123d35;
+      --forest-light: #1d594d;
+      --mint: #c9efda;
+      --lime: #d8f36a;
+      --amber: #e9a94f;
+      --red: #b64c45;
+      --green: #20734e;
+      --focus: #df9d41;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { min-width: 320px; background: var(--paper); }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background-color: var(--paper);
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(18, 61, 53, .035) 40px), linear-gradient(115deg, #f7f8f2 0%, #edf5f0 54%, #f6f5ed 100%);
+      font-family: "Thonburi", "Leelawadee UI", "Noto Sans Thai", sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+      min-height: 100vh;
+      min-height: 100svh;
+    }
+
+    button, input { font: inherit; }
+    button, input { color: inherit; }
+    button:focus-visible, input:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+    .shell {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: max(22px, env(safe-area-inset-top)) 0 max(30px, env(safe-area-inset-bottom));
+    }
+
+    .topbar {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(21, 54, 47, .18);
+      padding-bottom: 14px;
+    }
+
+    .wordmark { display: flex; align-items: center; gap: 11px; font-size: 13px; font-weight: 700; }
+    .mark { width: 35px; height: 35px; display: grid; place-items: center; background: var(--forest); color: var(--lime); font-size: 13px; font-weight: 800; border-radius: 9px; }
+    .local-note { color: var(--muted); font-size: 12px; }
+    .local-note::before { content: ""; display: inline-block; width: 7px; height: 7px; margin: 0 7px 1px 0; border-radius: 50%; background: #49a773; }
+
+    .intro { padding: 34px 0 24px; display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+    .eyebrow { margin: 0 0 5px; color: var(--forest-light); font-size: 12px; font-weight: 700; }
+    .fund-picker { display: grid; grid-template-columns: auto minmax(150px, 220px); align-items: center; gap: 10px; margin-bottom: 12px; }
+    .fund-picker label { color: var(--muted); font-size: 12px; font-weight: 700; }
+    .fund-picker select { min-width: 0; height: 40px; padding: 7px 32px 7px 10px; border: 1px solid #bdcec4; border-radius: 5px; background: #fff; color: var(--ink); font: inherit; font-size: 14px; font-weight: 700; }
+    h1 { margin: 0; font-size: 39px; line-height: 1.16; font-weight: 800; letter-spacing: 0; }
+    .intro-copy { max-width: 300px; margin: 0 0 3px; color: var(--muted); font-size: 14px; }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(310px, .85fr);
+      background: rgba(251, 252, 249, .88);
+      border: 1px solid rgba(21, 54, 47, .16);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .position { padding: 27px 30px 25px; }
+    .scenario { padding: 27px 30px 25px; border-left: 1px solid var(--line); background: rgba(244, 249, 244, .72); }
+    .section-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 21px; }
+    h2 { margin: 0; font-size: 18px; font-weight: 800; }
+    .section-tag { color: var(--muted); font-size: 11px; }
+    .value-label { color: var(--muted); font-size: 13px; }
+    .value-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; margin: 2px 0 0; }
+    .value-number { font-size: clamp(34px, 5vw, 51px); line-height: 1.18; letter-spacing: 0; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .currency { font-size: 14px; color: var(--muted); }
+    .gain-line { min-height: 26px; margin-top: 5px; color: var(--green); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .gain-line.negative { color: var(--red); }
+    .gain-line.neutral { color: var(--muted); }
+
+    .metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 27px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .metric { min-width: 0; padding: 0 12px; border-left: 1px solid var(--line); }
+    .metric:first-child { padding-left: 0; border-left: 0; }
+    .metric:last-child { padding-right: 0; }
+    .metric-label { display: block; min-height: 39px; color: var(--muted); font-size: 12px; }
+    .metric-value { display: block; overflow-wrap: anywhere; font-size: 17px; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+    .cost-note { margin: 18px 0 0; padding: 10px 12px; background: #edf4ee; color: #536d62; font-size: 12px; border-left: 3px solid #7da990; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px; }
+    .field { min-width: 0; }
+    .field label { display: block; margin-bottom: 6px; color: #50675f; font-size: 12px; font-weight: 700; }
+    .field-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2px 8px; margin-bottom: 6px; }
+    .field-heading label { margin-bottom: 0; }
+    .nav-refresh { min-height: 28px; padding: 3px 7px; border: 1px solid #bdcec4; border-radius: 4px; background: #fff; color: var(--forest); font-size: 11px; font-weight: 700; cursor: pointer; }
+    .nav-refresh:hover { background: #e6eee8; }
+    .nav-refresh:disabled { opacity: .6; cursor: wait; }
+    .nav-status { min-height: 30px; margin: 5px 0 0; color: var(--muted); font-size: 11px; line-height: 1.4; overflow-wrap: anywhere; }
+    .nav-status.error { color: var(--red); }
+    .nav-status.success { color: var(--green); }
+    .toggle-label { display: flex !important; align-items: center; gap: 7px; margin-top: 7px; color: #50675f; font-size: 11px !important; font-weight: 600 !important; cursor: pointer; }
+    .toggle-label input { width: 16px; height: 16px; margin: 0; accent-color: var(--forest-light); }
+    .input-wrap { position: relative; }
+    .input-wrap input { width: 100%; height: 45px; padding: 9px 41px 9px 11px; border: 1px solid #bdcec4; border-radius: 5px; background: #fff; font-size: 16px; font-variant-numeric: tabular-nums; }
+    .input-wrap input:disabled { background: #edf2ee; color: #647a73; }
+    .input-wrap input:focus { border-color: var(--forest-light); }
+    .unit { position: absolute; top: 50%; right: 11px; transform: translateY(-50%); color: #84948d; font-size: 11px; pointer-events: none; }
+    .scenario-result { margin-top: 21px; padding: 17px 18px; color: #eff8ef; background: var(--forest); border-radius: 6px; }
+    .scenario-result .result-kicker { color: #c1d9cb; font-size: 12px; }
+    .result-avg-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; margin: 1px 0 12px; }
+    .result-average { font-size: 30px; font-weight: 800; line-height: 1.3; font-variant-numeric: tabular-nums; }
+    .scenario-result .currency { color: #c1d9cb; }
+    .result-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.2); }
+    .result-detail span { display: block; }
+    .result-label { color: #c1d9cb; font-size: 11px; }
+    .result-value { margin-top: 2px; color: #fff; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+    .error { min-height: 22px; margin: 8px 0 0; color: #a43832; font-size: 12px; }
+    .actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 13px; }
+    .reset { min-height: 38px; padding: 6px 12px; border: 1px solid #b9c9bf; border-radius: 5px; background: transparent; color: var(--forest); font-size: 12px; font-weight: 700; cursor: pointer; }
+    .reset:hover { background: #e6eee8; }
+    .saved { color: var(--muted); font-size: 11px; text-align: right; }
+
+    .guidance { display: grid; grid-template-columns: 42px 1fr; gap: 12px; margin-top: 18px; padding: 14px 16px; border: 1px solid #e6d5b9; border-radius: 7px; background: rgba(255, 249, 235, .7); }
+    .guidance-mark { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: #f5e3bf; color: #80551c; font-weight: 800; }
+    .guidance h2 { margin: 0 0 2px; font-size: 13px; }
+    .guidance p { margin: 0; color: #665942; font-size: 12px; }
+    footer { display: flex; justify-content: space-between; gap: 15px; padding: 15px 2px 0; color: #6a7b73; font-size: 11px; }
+
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 28px, 560px); padding-top: max(14px, env(safe-area-inset-top)); }
+      .intro { align-items: start; flex-direction: column; gap: 8px; padding: 26px 0 18px; }
+      h1 { font-size: 34px; }
+      .intro-copy { max-width: none; }
+      .dashboard { grid-template-columns: 1fr; }
+      .position { padding: 22px 19px 20px; }
+      .scenario { padding: 22px 19px 20px; border-left: 0; border-top: 1px solid var(--line); }
+      .metrics { margin-top: 22px; }
+      .metric { padding: 0 9px; }
+      .metric-label { font-size: 11px; }
+      .metric-value { font-size: 15px; }
+      .guidance { margin-top: 14px; }
+      footer { flex-direction: column; gap: 3px; }
+    }
+
+    @media (max-width: 390px) {
+      .shell { width: calc(100% - 22px); }
+      .position, .scenario { padding-right: 14px; padding-left: 14px; }
+      .form-grid { gap: 12px 8px; }
+      .metric { padding: 0 6px; }
+      .metric-label { font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="wordmark"><span class="mark" aria-hidden="true">F</span><span>เครื่องมือคำนวณกองทุน</span></div>
+      <span class="local-note">บันทึกในอุปกรณ์นี้</span>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">ต้นทุน · มูลค่าปัจจุบัน · จำลองซื้อเพิ่ม</p>
+        <div class="fund-picker">
+          <label for="fund-select">เลือกกองทุน</label>
+          <select id="fund-select" name="fund">
+            <option value="scbnk225">SCBNK225</option>
+            <option value="kjpx-aa">K-JPX-A(A)</option>
+            <option value="scbsp500a">SCBS&amp;P500A</option>
+            <option value="scbrmdigi-a">SCBRMDIGI(A)</option>
+          </select>
+        </div>
+        <h1 id="page-title">SCBNK225</h1>
+      </div>
+      <p class="intro-copy">ปรับตัวเลขเพื่อดูภาพรวมพอร์ตและผลของการซื้อเพิ่ม</p>
+    </section>
+
+    <section class="dashboard" aria-label="ข้อมูลกองทุนและจำลองการลงทุน">
+      <section class="position" aria-labelledby="position-title">
+        <div class="section-heading">
+          <h2 id="position-title">พอร์ตหลังซื้อจำลอง</h2>
+          <span class="section-tag">รวมการซื้อเพิ่มตามค่าที่กรอก</span>
+        </div>
+        <div class="value-label">มูลค่าตลาดโดยประมาณ</div>
+        <div class="value-line"><span class="value-number" id="market-value">-</span><span class="currency">บาท</span></div>
+        <p class="gain-line" id="gain-line" aria-live="polite">-</p>
+
+        <div class="metrics">
+          <div class="metric"><span class="metric-label">จำนวนหน่วยหลังซื้อ</span><span class="metric-value" id="holding-units">-</span></div>
+          <div class="metric"><span class="metric-label">ต้นทุนเฉลี่ยหลังซื้อ</span><span class="metric-value" id="average-cost">-</span></div>
+          <div class="metric"><span class="metric-label">ราคาปัจจุบัน</span><span class="metric-value" id="current-price-display">-</span></div>
+        </div>
+        <p class="cost-note" id="cost-note">-</p>
+      </section>
+
+      <section class="scenario" aria-labelledby="scenario-title">
+        <div class="section-heading">
+          <h2 id="scenario-title">จำลองซื้อเพิ่ม</h2>
+          <span class="section-tag">ไม่รวมค่าธรรมเนียม</span>
+        </div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="units">จำนวนหน่วยเดิม</label>
+            <div class="input-wrap"><input id="units" name="units" type="number" min="0.00000001" step="any" inputmode="decimal" value="1404.6552"><span class="unit">หน่วย</span></div>
+          </div>
+          <div class="field">
+            <label for="average">ต้นทุนเฉลี่ย</label>
+            <div class="input-wrap"><input id="average" name="average" type="number" min="0.00000001" step="any" inputmode="decimal" value="29.9005"><span class="unit">บาท</span></div>
+          </div>
+          <div class="field">
+            <div class="field-heading">
+              <label for="current-price">ราคาปัจจุบัน</label>
+              <button class="nav-refresh" id="refresh-nav" type="button">อัปเดต NAV</button>
+            </div>
+            <div class="input-wrap"><input id="current-price" name="currentPrice" type="number" min="0.00000001" step="any" inputmode="decimal" value="44.9093"><span class="unit">บาท</span></div>
+            <p class="nav-status" id="nav-status" role="status" aria-live="polite">กดเพื่อดึง NAV ล่าสุดจาก SEC</p>
+          </div>
+          <div class="field">
+            <label for="buy-amount">เงินลงทุนเพิ่ม</label>
+            <div class="input-wrap"><input id="buy-amount" name="buyAmount" type="number" min="0" step="any" inputmode="decimal" value="5000"><span class="unit">บาท</span></div>
+          </div>
+          <div class="field">
+            <label for="buy-price">ราคาซื้อเพิ่ม</label>
+            <div class="input-wrap"><input id="buy-price" name="buyPrice" type="number" min="0.00000001" step="any" inputmode="decimal" value="44.9093"><span class="unit">บาท/หน่วย</span></div>
+            <label class="toggle-label" for="buy-price-at-current"><input id="buy-price-at-current" type="checkbox" checked>ใช้ราคาปัจจุบันเป็นราคาซื้อเพิ่ม</label>
+          </div>
+        </div>
+        <p class="error" id="input-error" role="alert" aria-live="polite"></p>
+
+        <div class="scenario-result" aria-live="polite">
+          <div class="result-kicker">ต้นทุนเฉลี่ยใหม่หลังซื้อ</div>
+          <div class="result-avg-line"><span class="result-average" id="new-average">-</span><span class="currency">บาท/หน่วย</span></div>
+          <div class="result-detail">
+            <div><span class="result-label">หน่วยที่ซื้อเพิ่ม</span><span class="result-value" id="added-units">-</span></div>
+            <div><span class="result-label">จำนวนหน่วยรวม</span><span class="result-value" id="total-units">-</span></div>
+            <div><span class="result-label">ต้นทุนรวมหลังซื้อ</span><span class="result-value" id="total-cost">-</span></div>
+            <div><span class="result-label">ราคาซื้อจำลอง</span><span class="result-value" id="buy-price-display">-</span></div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="reset" id="reset" type="button">คืนค่าเริ่มต้น</button>
+          <span class="saved" id="save-status" aria-live="polite">ค่าที่แก้จะบันทึกไว้ในเครื่อง</span>
+        </div>
+      </section>
+    </section>
+
+    <aside class="guidance" aria-labelledby="guidance-title">
+      <span class="guidance-mark" aria-hidden="true">i</span>
+      <div>
+        <h2 id="guidance-title">ใช้ประกอบการตัดสินใจ ไม่ใช่สัญญาณซื้อขาย</h2>
+        <p id="price-context">-</p>
+        <p>ราคาที่สูงหรือต่ำกว่าต้นทุนเฉลี่ยและผลตอบแทนที่ผ่านมา ไม่สามารถบอกทิศทางราคาในอนาคตหรือจังหวะเข้าซื้อที่เหมาะสมได้</p>
+      </div>
+    </aside>
+
+    <footer>
+      <span>SCBNK225, K-JPX-A(A), SCBS&amp;P500A และ SCBRMDIGI(A) ดึง NAV จาก SEC เมื่อกดอัปเดต</span>
+      <span>ข้อมูลส่วนตัวจัดเก็บในเบราว์เซอร์บนอุปกรณ์นี้</span>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      const funds = {
+        "scbnk225": {
+          name: "SCBNK225",
+          storageKey: "scbnk225-calculator-v1",
+          reportedCost: 42000,
+          apiFundId: "scbnk225",
+          defaults: {
+            units: "1404.6552",
+            average: "29.9005",
+            currentPrice: "44.9093",
+            buyAmount: "5000",
+            buyPrice: "44.9093"
+          }
+        },
+        "kjpx-aa": {
+          name: "K-JPX-A(A)",
+          storageKey: "kjpx-aa-calculator-v1",
+          reportedCost: 47500,
+          apiFundId: "kjpx-aa",
+          defaults: {
+            units: "2038.1262",
+            average: "23.3057",
+            currentPrice: "",
+            buyAmount: "0",
+            buyPrice: ""
+          }
+        },
+        "scbsp500a": {
+          name: "SCBS&P500A",
+          storageKey: "scbsp500a-calculator-v1",
+          reportedCost: 112000,
+          apiFundId: "scbsp500a",
+          defaults: {
+            units: "3414.9413",
+            average: "32.7970",
+            currentPrice: "",
+            buyAmount: "0",
+            buyPrice: ""
+          }
+        },
+        "scbrmdigi-a": {
+          name: "SCBRMDIGI(A)",
+          storageKey: "scbrmdigi-a-calculator-v1",
+          reportedCost: 107999.4,
+          apiFundId: "scbrmdigi-a",
+          defaults: {
+            units: "6458.7535",
+            average: "16.7214",
+            currentPrice: "",
+            buyAmount: "0",
+            buyPrice: ""
+          }
+        }
+      };
+      const selectedFundKey = "fund-calculator-selected-v1";
+      const fundSelect = document.getElementById("fund-select");
+      let activeFundId = "scbnk225";
+      try {
+        const savedFundId = localStorage.getItem(selectedFundKey);
+        if (funds[savedFundId]) activeFundId = savedFundId;
+      } catch {}
+      fundSelect.value = activeFundId;
+      let activeFund = funds[activeFundId];
+      let defaults = activeFund.defaults;
+      const fields = Object.fromEntries(Object.keys(defaults).map((key) => [key, document.querySelector(`[name="${key}"]`)]));
+      const output = (id) => document.getElementById(id);
+      const money = new Intl.NumberFormat("th-TH", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const precise = new Intl.NumberFormat("th-TH", { minimumFractionDigits: 0, maximumFractionDigits: 4 });
+      const navButton = output("refresh-nav");
+      const navStatus = output("nav-status");
+      const buyPriceAtCurrent = output("buy-price-at-current");
+
+      function show(id, value) {
+        output(id).textContent = value;
+      }
+
+      function clearResults() {
+        ["market-value", "holding-units", "average-cost", "current-price-display", "new-average", "added-units", "total-units", "total-cost", "buy-price-display"].forEach((id) => show(id, "-"));
+        show("gain-line", "กรุณาตรวจสอบข้อมูลที่กรอก");
+        output("gain-line").className = "gain-line neutral";
+        show("cost-note", "");
+        show("price-context", "");
+      }
+
+      function getValues() {
+        const values = Object.fromEntries(Object.entries(fields).map(([key, field]) => [key, Number(field.value)]));
+        const invalid = Object.entries(values).find(([key, value]) => {
+          if (key === "currentPrice" && fieldIsBlank(fields[key])) return false;
+          if (key === "buyPrice" && fieldIsBlank(fields[key]) && values.buyAmount === 0) return false;
+          if (fieldIsBlank(fields[key]) || !Number.isFinite(value)) return true;
+          return key === "buyAmount" ? value < 0 : value <= 0;
+        });
+        if (invalid) {
+          const labels = {
+            units: "จำนวนหน่วยเดิมต้องมากกว่า 0",
+            average: "ต้นทุนเฉลี่ยต้องมากกว่า 0",
+            currentPrice: "ราคาปัจจุบันต้องมากกว่า 0 หรือเว้นว่างไว้จนกว่าจะมี NAV",
+            buyAmount: "เงินลงทุนเพิ่มต้องเป็น 0 หรือมากกว่า",
+            buyPrice: "ราคาซื้อเพิ่มต้องมากกว่า 0"
+          };
+          return { error: labels[invalid[0]] };
+        }
+        return { values };
+      }
+
+      function fieldIsBlank(field) {
+        return field.value.trim() === "";
+      }
+
+      function formatNavDate(value) {
+        const parts = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || "");
+        if (!parts) return value || "ไม่ระบุวันที่";
+        return new Intl.DateTimeFormat("th-TH", { day: "numeric", month: "short", year: "numeric" })
+          .format(new Date(Number(parts[1]), Number(parts[2]) - 1, Number(parts[3])));
+      }
+
+      async function refreshNav() {
+        navButton.disabled = true;
+        navStatus.className = "nav-status";
+        navStatus.textContent = "กำลังดึง NAV ล่าสุด...";
+        try {
+          const response = await fetch(`/api/nav?fund=${encodeURIComponent(activeFund.apiFundId)}`, { cache: "no-store", headers: { Accept: "application/json" } });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(data.error || "ดึง NAV ไม่สำเร็จ");
+          const nav = Number(data.nav);
+          if (!Number.isFinite(nav) || nav <= 0) throw new Error("ข้อมูล NAV ที่ได้รับไม่ถูกต้อง");
+
+          fields.currentPrice.value = String(nav);
+          if (buyPriceAtCurrent.checked) fields.buyPrice.value = String(nav);
+          render();
+          save();
+          navStatus.className = "nav-status success";
+          navStatus.textContent = `NAV ${precise.format(nav)} บาท · ข้อมูล ณ ${formatNavDate(data.navDate)}`;
+        } catch (error) {
+          navStatus.className = "nav-status error";
+          navStatus.textContent = error instanceof TypeError
+            ? "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ตรวจว่าเปิดด้วย node server.js"
+            : error.message;
+        } finally {
+          navButton.disabled = false;
+        }
+      }
+
+      function render() {
+        const result = getValues();
+        const error = output("input-error");
+        if (result.error) {
+          error.textContent = result.error;
+          clearResults();
+          return;
+        }
+        error.textContent = "";
+
+        const { units, average, currentPrice, buyAmount, buyPrice } = result.values;
+        const hasCurrentPrice = !fieldIsBlank(fields.currentPrice);
+        const initialCostBasis = units * average;
+        const addedUnits = buyAmount > 0 ? buyAmount / buyPrice : 0;
+        const totalUnits = units + addedUnits;
+        const totalCost = initialCostBasis + buyAmount;
+        const newAverage = totalCost / totalUnits;
+        const marketValue = hasCurrentPrice ? totalUnits * currentPrice : null;
+        const gain = hasCurrentPrice ? marketValue - totalCost : null;
+        const returnPercent = hasCurrentPrice ? (gain / totalCost) * 100 : null;
+
+        show("market-value", hasCurrentPrice ? money.format(marketValue) : "รอ NAV");
+        show("holding-units", precise.format(totalUnits));
+        show("average-cost", precise.format(newAverage));
+        show("current-price-display", hasCurrentPrice ? money.format(currentPrice) : "ยังไม่ระบุ");
+        show("new-average", precise.format(newAverage));
+        show("added-units", precise.format(addedUnits));
+        show("total-units", precise.format(totalUnits));
+        show("total-cost", money.format(totalCost));
+        show("buy-price-display", buyAmount > 0 ? money.format(buyPrice) : "—");
+
+        const gainLine = output("gain-line");
+        if (hasCurrentPrice) {
+          const gainPrefix = gain > 0 ? "+" : "";
+          gainLine.textContent = `กำไร/ขาดทุนที่ยังไม่ขายหลังซื้อจำลอง ${gainPrefix}${money.format(gain)} บาท (${gainPrefix}${money.format(returnPercent)}%)`;
+          gainLine.className = `gain-line ${gain > 0 ? "" : gain < 0 ? "negative" : "neutral"}`;
+        } else {
+          gainLine.textContent = "กรอก NAV ปัจจุบันเพื่อคำนวณมูลค่าและกำไร/ขาดทุน";
+          gainLine.className = "gain-line neutral";
+        }
+        show("cost-note", `ต้นทุนรวมหลังซื้อจำลอง ${money.format(totalCost)} บาท (หน่วยเดิม × ต้นทุนเฉลี่ย = ${money.format(initialCostBasis)} บาท; ต้นทุนที่แจ้งไว้ ${money.format(activeFund.reportedCost)} บาท)`);
+
+        if (hasCurrentPrice) {
+          const priceDifference = ((currentPrice - newAverage) / newAverage) * 100;
+          const relation = currentPrice > newAverage ? "สูงกว่า" : currentPrice < newAverage ? "ต่ำกว่า" : "เท่ากับ";
+          const differencePrefix = priceDifference > 0 ? "+" : "";
+          show("price-context", `ราคาปัจจุบัน ${relation} ต้นทุนเฉลี่ยหลังซื้อ ${differencePrefix}${money.format(priceDifference)}%`);
+        } else {
+          show("price-context", `ยังไม่มี NAV ปัจจุบันของ ${activeFund.name}; กรอก NAV ล่าสุดเพื่อดูผลตอบแทน`);
+        }
+      }
+
+      function save() {
+        try {
+          const values = Object.fromEntries(Object.entries(fields).map(([key, field]) => [key, field.value]));
+          values.buyPriceAtCurrent = buyPriceAtCurrent.checked;
+          localStorage.setItem(activeFund.storageKey, JSON.stringify(values));
+          show("save-status", "บันทึกในอุปกรณ์นี้แล้ว");
+        } catch {
+          show("save-status", "เบราว์เซอร์ไม่อนุญาตให้บันทึกข้อมูล");
+        }
+      }
+
+      function load() {
+        Object.entries(defaults).forEach(([key, value]) => { fields[key].value = value; });
+        buyPriceAtCurrent.checked = true;
+        try {
+          const saved = JSON.parse(localStorage.getItem(activeFund.storageKey) || "null");
+          if (saved && typeof saved === "object") {
+            Object.entries(fields).forEach(([key, field]) => {
+              if (typeof saved[key] === "string") field.value = saved[key];
+            });
+            if (typeof saved.buyPriceAtCurrent === "boolean") buyPriceAtCurrent.checked = saved.buyPriceAtCurrent;
+          }
+        } catch {
+          localStorage.removeItem(activeFund.storageKey);
+        }
+        fields.buyPrice.disabled = buyPriceAtCurrent.checked;
+        if (buyPriceAtCurrent.checked) fields.buyPrice.value = fields.currentPrice.value;
+      }
+
+      function switchFund(fundId) {
+        save();
+        activeFundId = fundId;
+        activeFund = funds[activeFundId];
+        defaults = activeFund.defaults;
+        document.getElementById("page-title").textContent = activeFund.name;
+        navButton.hidden = !activeFund.apiFundId;
+        navStatus.className = "nav-status";
+        navStatus.textContent = "กดเพื่อดึง NAV ล่าสุดจาก SEC";
+        output("save-status").textContent = "ค่าที่แก้จะบันทึกไว้ในเครื่อง";
+        try {
+          localStorage.setItem(selectedFundKey, activeFundId);
+        } catch {}
+        load();
+        render();
+      }
+
+      Object.entries(fields).forEach(([key, field]) => {
+        field.addEventListener("input", () => {
+          if (key === "currentPrice" && buyPriceAtCurrent.checked) fields.buyPrice.value = field.value;
+          render();
+          save();
+        });
+      });
+
+      navButton.addEventListener("click", refreshNav);
+      buyPriceAtCurrent.addEventListener("change", () => {
+        fields.buyPrice.disabled = buyPriceAtCurrent.checked;
+        if (buyPriceAtCurrent.checked) fields.buyPrice.value = fields.currentPrice.value;
+        render();
+        save();
+      });
+      fields.currentPrice.addEventListener("input", () => {
+        navStatus.className = "nav-status";
+        navStatus.textContent = "ราคาแก้ไขด้วยตนเอง";
+      });
+      fundSelect.addEventListener("change", () => switchFund(fundSelect.value));
+
+      document.getElementById("reset").addEventListener("click", () => {
+        Object.entries(fields).forEach(([key, field]) => { field.value = defaults[key]; });
+        buyPriceAtCurrent.checked = true;
+        fields.buyPrice.disabled = true;
+        fields.buyPrice.value = fields.currentPrice.value;
+        render();
+        save();
+      });
+
+      load();
+      document.getElementById("page-title").textContent = activeFund.name;
+      navButton.hidden = !activeFund.apiFundId;
+      navStatus.textContent = "กดเพื่อดึง NAV ล่าสุดจาก SEC";
+      render();
+
+      if ("serviceWorker" in navigator && location.protocol !== "file:") {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("service-worker.js").catch(() => {});
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

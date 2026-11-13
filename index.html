@@ -194,6 +194,13 @@
     .nav-stat.change-positive .nav-stat-value { color: var(--green); }
     .nav-stat.change-negative .nav-stat-value { color: var(--red); }
     .nav-stat.change-neutral .nav-stat-value { color: var(--muted); }
+    .nav-chart-section { padding: 18px 22px 10px; border-top: 1px solid var(--line); }
+    .nav-chart-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 5px; }
+    .nav-chart-heading h3 { margin: 0; font-size: 13px; }
+    .nav-chart-range { color: var(--muted); font-size: 11px; text-align: right; }
+    .nav-chart { display: block; width: 100%; height: 230px; }
+    .nav-chart-empty, .nav-chart-summary { margin: 5px 0 0; color: var(--muted); font-size: 11px; }
+    .nav-chart-summary { color: var(--ink); font-weight: 700; }
 
     .guidance { display: grid; grid-template-columns: 42px 1fr; gap: 12px; margin-top: 18px; padding: 14px 16px; border: 1px solid #e6d5b9; border-radius: 7px; background: rgba(255, 249, 235, .7); }
     .guidance-mark { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: #f5e3bf; color: #80551c; font-weight: 800; }
@@ -222,6 +229,8 @@
       .analysis-decision { padding-right: 19px; padding-left: 19px; }
       .nav-stat { padding: 15px 12px; }
       .nav-stat-value { font-size: 21px; }
+      .nav-chart-section { padding: 16px 14px 8px; }
+      .nav-chart { height: 210px; }
       .guidance { margin-top: 14px; }
       footer { flex-direction: column; gap: 3px; }
     }
@@ -244,6 +253,9 @@
       .nav-stat { padding: 13px 8px; }
       .nav-stat-label, .nav-stat-detail { font-size: 10px; }
       .nav-stat-value { font-size: 18px; }
+      .nav-chart-section { padding-right: 10px; padding-left: 10px; }
+      .nav-chart-heading { align-items: start; flex-direction: column; gap: 1px; }
+      .nav-chart-range { text-align: left; }
     }
   </style>
 </head>
@@ -367,6 +379,15 @@
         </div>
       </div>
       <p class="nav-status" id="nav-comparison-status" role="status" aria-live="polite">กดปุ่มอัปเดต NAV เพื่อเปรียบเทียบข้อมูล</p>
+      <section class="nav-chart-section" aria-labelledby="nav-chart-title">
+        <div class="nav-chart-heading">
+          <h3 id="nav-chart-title">แนวโน้ม NAV · 30 วัน</h3>
+          <span class="nav-chart-range" id="nav-chart-range">รอข้อมูล</span>
+        </div>
+        <canvas class="nav-chart" id="nav-chart" role="img" aria-label="กราฟแนวโน้ม NAV" hidden></canvas>
+        <p class="nav-chart-empty" id="nav-chart-empty">กดอัปเดต NAV เพื่อแสดงกราฟย้อนหลัง</p>
+        <p class="nav-chart-summary" id="nav-chart-summary" hidden></p>
+      </section>
     </section>
 
     <aside class="guidance" aria-labelledby="guidance-title">
@@ -470,6 +491,8 @@
       const navButton = output("refresh-nav");
       const navStatsButton = output("refresh-nav-stats");
       const navStatus = output("nav-status");
+      const navCanvas = output("nav-chart");
+      let navHistory = [];
       const buyPriceAtCurrent = output("buy-price-at-current");
 
       function show(id, value) {
@@ -516,6 +539,100 @@
           .format(new Date(Number(parts[1]), Number(parts[2]) - 1, Number(parts[3])));
       }
 
+      function renderNavChart(history) {
+        navHistory = (Array.isArray(history) ? history : [])
+          .filter((item) => Number.isFinite(Number(item.nav)) && Number(item.nav) > 0 && item.navDate)
+          .sort((left, right) => String(left.navDate).localeCompare(String(right.navDate)));
+        const emptyMessage = output("nav-chart-empty");
+        const summary = output("nav-chart-summary");
+        const range = output("nav-chart-range");
+        if (navHistory.length < 2) {
+          navCanvas.hidden = true;
+          emptyMessage.hidden = false;
+          summary.hidden = true;
+          range.textContent = "รอข้อมูล";
+          emptyMessage.textContent = navHistory.length ? "มีข้อมูล NAV ไม่เพียงพอสำหรับวาดกราฟ" : "กดอัปเดต NAV เพื่อแสดงกราฟย้อนหลัง";
+          return;
+        }
+
+        navCanvas.hidden = false;
+        emptyMessage.hidden = true;
+        summary.hidden = false;
+        const first = navHistory[0];
+        const latest = navHistory[navHistory.length - 1];
+        range.textContent = `${formatNavDate(first.navDate)} – ${formatNavDate(latest.navDate)} · ${navHistory.length} จุด`;
+        const change = Number(latest.nav) - Number(first.nav);
+        const changePercent = (change / Number(first.nav)) * 100;
+        const prefix = change > 0 ? "+" : "";
+        const direction = change > 0 ? "เพิ่มขึ้น" : change < 0 ? "ลดลง" : "ทรงตัว";
+        summary.textContent = `NAV ${direction} ${prefix}${precise.format(change)} บาท (${prefix}${money.format(changePercent)}%) ในช่วงข้อมูลนี้`;
+        navCanvas.setAttribute("aria-label", `กราฟ NAV ${range.textContent}; ${summary.textContent}`);
+
+        const width = Math.max(280, navCanvas.clientWidth);
+        const height = navCanvas.clientHeight;
+        const pixelRatio = window.devicePixelRatio || 1;
+        navCanvas.width = Math.round(width * pixelRatio);
+        navCanvas.height = Math.round(height * pixelRatio);
+        const context = navCanvas.getContext("2d");
+        context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        context.clearRect(0, 0, width, height);
+
+        const padding = { top: 16, right: 12, bottom: 34, left: 64 };
+        const plotWidth = width - padding.left - padding.right;
+        const plotHeight = height - padding.top - padding.bottom;
+        const values = navHistory.map((item) => Number(item.nav));
+        const minimum = Math.min(...values);
+        const maximum = Math.max(...values);
+        const spread = maximum - minimum || maximum * 0.02;
+        const lowerBound = Math.max(0, minimum - spread * 0.12);
+        const upperBound = maximum + spread * 0.12;
+        const yFor = (value) => padding.top + ((upperBound - value) / (upperBound - lowerBound)) * plotHeight;
+        const xFor = (index) => padding.left + (index / (navHistory.length - 1)) * plotWidth;
+        const styles = getComputedStyle(document.documentElement);
+
+        context.font = "12px sans-serif";
+        context.textBaseline = "middle";
+        context.textAlign = "right";
+        context.fillStyle = styles.getPropertyValue("--muted").trim();
+        context.strokeStyle = styles.getPropertyValue("--line").trim();
+        context.lineWidth = 1;
+        for (let tick = 0; tick <= 4; tick += 1) {
+          const value = upperBound - ((upperBound - lowerBound) * tick) / 4;
+          const y = padding.top + (plotHeight * tick) / 4;
+          context.beginPath();
+          context.moveTo(padding.left, y);
+          context.lineTo(width - padding.right, y);
+          context.stroke();
+          context.fillText(precise.format(value), padding.left - 8, y);
+        }
+
+        context.beginPath();
+        navHistory.forEach((item, index) => {
+          const x = xFor(index);
+          const y = yFor(Number(item.nav));
+          if (index === 0) context.moveTo(x, y);
+          else context.lineTo(x, y);
+        });
+        context.strokeStyle = styles.getPropertyValue(change >= 0 ? "--green" : "--red").trim();
+        context.lineWidth = 2.5;
+        context.lineJoin = "round";
+        context.lineCap = "round";
+        context.stroke();
+
+        const dateIndexes = [...new Set([0, Math.floor((navHistory.length - 1) / 2), navHistory.length - 1])];
+        context.fillStyle = styles.getPropertyValue("--muted").trim();
+        context.textBaseline = "alphabetic";
+        dateIndexes.forEach((index) => {
+          context.textAlign = index === 0 ? "left" : index === navHistory.length - 1 ? "right" : "center";
+          context.fillText(formatNavDate(navHistory[index].navDate), xFor(index), height - 8);
+        });
+
+        context.beginPath();
+        context.arc(xFor(navHistory.length - 1), yFor(Number(latest.nav)), 4, 0, Math.PI * 2);
+        context.fillStyle = styles.getPropertyValue(change >= 0 ? "--green" : "--red").trim();
+        context.fill();
+      }
+
       function clearNavComparison(message = "กดปุ่มอัปเดต NAV เพื่อเปรียบเทียบข้อมูล") {
         show("latest-nav", "-");
         show("latest-nav-date", "รอข้อมูล NAV ล่าสุด");
@@ -525,6 +642,7 @@
         show("nav-change-percent", "รอข้อมูลเพื่อคำนวณ");
         output("nav-change-stat").className = "nav-stat change-neutral";
         show("nav-comparison-status", message);
+        renderNavChart([]);
       }
 
       async function refreshNav() {
@@ -540,6 +658,7 @@
           const nav = Number(data.nav);
           if (!Number.isFinite(nav) || nav <= 0) throw new Error("ข้อมูล NAV ที่ได้รับไม่ถูกต้อง");
           const previousNav = data.previousNav === null ? null : Number(data.previousNav);
+          renderNavChart(data.history);
 
           fields.currentPrice.value = String(nav);
           if (buyPriceAtCurrent.checked) fields.buyPrice.value = String(nav);
@@ -1006,6 +1125,9 @@
 
       navButton.addEventListener("click", refreshNav);
       navStatsButton.addEventListener("click", refreshNav);
+      window.addEventListener("resize", () => {
+        if (!navCanvas.hidden) renderNavChart(navHistory);
+      });
       buyPriceAtCurrent.addEventListener("change", () => {
         fields.buyPrice.disabled = buyPriceAtCurrent.checked;
         if (buyPriceAtCurrent.checked) fields.buyPrice.value = fields.currentPrice.value;

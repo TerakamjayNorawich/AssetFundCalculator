@@ -552,6 +552,10 @@ async function getNav(response, fundId) {
     navDate: record.nav_date,
     previousNav: previousRecord ? Number(previousRecord.last_val) : null,
     previousNavDate: previousRecord?.nav_date || null,
+    history: records.slice().reverse().map((item) => ({
+      nav: Number(item.last_val),
+      navDate: item.nav_date
+    })),
     lastUpdated: record.last_upd_date,
     fundClassName: record.fund_class_name
   });

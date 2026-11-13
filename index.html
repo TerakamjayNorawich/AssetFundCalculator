@@ -141,6 +141,60 @@
     .reset:hover { background: #e6eee8; }
     .saved { color: var(--muted); font-size: 11px; text-align: right; }
 
+    .analyzer { margin-top: 18px; overflow: hidden; border: 1px solid rgba(21, 54, 47, .16); border-radius: 8px; background: var(--surface); }
+    .analyzer-header { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 18px 22px; border-bottom: 1px solid var(--line); }
+    .analyzer-header h2 { margin: 0 0 3px; }
+    .analyzer-header p { margin: 0; color: var(--muted); font-size: 12px; }
+    .analysis-reset { min-height: 34px; padding: 5px 10px; border: 1px solid #b9c9bf; border-radius: 5px; background: transparent; color: var(--forest); font-size: 11px; font-weight: 700; cursor: pointer; }
+    .analysis-reset:hover { background: #e6eee8; }
+    .analysis-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--line); background: #f2f7f1; }
+    .analysis-summary-item { min-width: 0; padding: 15px 20px; border-left: 1px solid var(--line); }
+    .analysis-summary-item:first-child { border-left: 0; }
+    .analysis-summary-label { display: block; color: var(--muted); font-size: 11px; font-weight: 700; }
+    .analysis-summary-value { display: block; margin-top: 1px; font-size: 27px; font-weight: 800; line-height: 1.3; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+    .analysis-summary-note { display: block; color: var(--muted); font-size: 11px; }
+    .analysis-columns { display: grid; grid-template-columns: 1fr 1fr; }
+    .analysis-panel { min-width: 0; padding: 20px 22px; }
+    .analysis-panel + .analysis-panel { border-left: 1px solid var(--line); }
+    .analysis-panel h3 { margin: 0; font-size: 15px; }
+    .analysis-panel-intro { margin: 3px 0 14px; color: var(--muted); font-size: 11px; }
+    .market-sheet-guide { margin: -5px 0 14px; color: var(--muted); font-size: 10px; line-height: 1.4; }
+    .market-sheet-guide summary { width: fit-content; color: var(--forest); font-weight: 700; cursor: pointer; }
+    .market-sheet-guide p { margin: 6px 0; }
+    .market-sheet-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 12px; margin: 8px 0 0; }
+    .market-sheet-columns div { min-width: 0; }
+    .market-sheet-columns dt { color: var(--ink); font-weight: 700; }
+    .market-sheet-columns dd { margin: 1px 0 0; }
+    .analysis-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 11px; }
+    .analysis-field { min-width: 0; }
+    .analysis-field label { display: block; min-height: 34px; margin-bottom: 4px; color: #50675f; font-size: 11px; font-weight: 700; line-height: 1.35; }
+    .analysis-field input, .analysis-field select { width: 100%; min-width: 0; height: 39px; padding: 6px 9px; border: 1px solid #bdcec4; border-radius: 4px; background: #fff; color: var(--ink); font: inherit; font-size: 13px; }
+    .analysis-field input:disabled, .analysis-field select:disabled { background: #edf2ee; color: var(--ink); opacity: 1; }
+    .analysis-field input { font-variant-numeric: tabular-nums; }
+    .analysis-field-hint { display: block; min-height: 28px; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.35; }
+    .analysis-breakdown { margin-top: 16px; }
+    .analysis-breakdown h4 { margin: 0 0 5px; font-size: 11px; }
+    .analysis-breakdown ol { margin: 0; padding: 0; list-style: none; }
+    .score-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 6px 0; border-top: 1px solid #e6ece7; color: #536a60; font-size: 11px; }
+    .score-factor { min-width: 0; }
+    .score-name { display: block; color: #536a60; }
+    .score-detail { display: block; margin-top: 2px; color: var(--muted); font-size: 10px; line-height: 1.4; overflow-wrap: anywhere; }
+    .score-row .score-value { flex: 0 0 auto; color: var(--ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+    .analysis-note { margin: 11px 0 0; color: var(--muted); font-size: 10px; line-height: 1.45; }
+    .analysis-decision { padding: 15px 22px; border-top: 1px solid var(--line); background: #edf4ee; }
+    .analysis-decision h3 { margin: 0 0 3px; font-size: 13px; }
+    .analysis-decision p { margin: 0; color: #536a60; font-size: 12px; }
+    .analysis-decision p + p { margin-top: 3px; font-size: 10px; }
+    .nav-comparison { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: #f2f7f1; }
+    .nav-stat { min-width: 0; padding: 18px 22px; border-left: 1px solid var(--line); }
+    .nav-stat:first-child { border-left: 0; }
+    .nav-stat-label { display: block; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .nav-stat-value { display: block; margin-top: 3px; font-size: 25px; line-height: 1.3; font-weight: 800; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+    .nav-stat-detail { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
+    .nav-stat.change-positive .nav-stat-value { color: var(--green); }
+    .nav-stat.change-negative .nav-stat-value { color: var(--red); }
+    .nav-stat.change-neutral .nav-stat-value { color: var(--muted); }
+
     .guidance { display: grid; grid-template-columns: 42px 1fr; gap: 12px; margin-top: 18px; padding: 14px 16px; border: 1px solid #e6d5b9; border-radius: 7px; background: rgba(255, 249, 235, .7); }
     .guidance-mark { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: #f5e3bf; color: #80551c; font-weight: 800; }
     .guidance h2 { margin: 0 0 2px; font-size: 13px; }
@@ -159,6 +213,15 @@
       .metric { padding: 0 9px; }
       .metric-label { font-size: 11px; }
       .metric-value { font-size: 15px; }
+      .analysis-columns { grid-template-columns: 1fr; }
+      .analysis-panel + .analysis-panel { border-top: 1px solid var(--line); border-left: 0; }
+      .analysis-panel { padding: 18px 19px; }
+      .analyzer-header { align-items: start; }
+      .analysis-summary-item { padding: 13px 12px; }
+      .analysis-summary-value { font-size: 23px; }
+      .analysis-decision { padding-right: 19px; padding-left: 19px; }
+      .nav-stat { padding: 15px 12px; }
+      .nav-stat-value { font-size: 21px; }
       .guidance { margin-top: 14px; }
       footer { flex-direction: column; gap: 3px; }
     }
@@ -169,6 +232,18 @@
       .form-grid { gap: 12px 8px; }
       .metric { padding: 0 6px; }
       .metric-label { font-size: 10px; }
+      .analysis-header { padding: 15px 14px; }
+      .analysis-panel { padding: 16px 14px; }
+      .analysis-fields { gap: 10px 8px; }
+      .analysis-field label { min-height: 40px; font-size: 10px; }
+      .analysis-summary-item { padding: 12px 8px; }
+      .analysis-summary-value { font-size: 20px; }
+      .analysis-summary-label, .analysis-summary-note { font-size: 10px; }
+      .analysis-reset { padding: 4px 7px; font-size: 10px; }
+      .analysis-decision { padding-right: 14px; padding-left: 14px; }
+      .nav-stat { padding: 13px 8px; }
+      .nav-stat-label, .nav-stat-detail { font-size: 10px; }
+      .nav-stat-value { font-size: 18px; }
     }
   </style>
 </head>
@@ -264,6 +339,34 @@
           <span class="saved" id="save-status" aria-live="polite">ค่าที่แก้จะบันทึกไว้ในเครื่อง</span>
         </div>
       </section>
+    </section>
+
+    <section class="analyzer" aria-labelledby="analysis-title">
+      <header class="analyzer-header">
+        <div>
+          <h2 id="analysis-title">สถิติ NAV ล่าสุด</h2>
+          <p>เปรียบเทียบ NAV ล่าสุดกับวันที่มีข้อมูลก่อนหน้า จาก SEC Open Data</p>
+        </div>
+        <button class="analysis-reset" id="refresh-nav-stats" type="button">อัปเดต NAV</button>
+      </header>
+      <div class="nav-comparison" aria-live="polite">
+        <div class="nav-stat">
+          <span class="nav-stat-label">NAV ล่าสุด</span>
+          <strong class="nav-stat-value" id="latest-nav">-</strong>
+          <span class="nav-stat-detail" id="latest-nav-date">กดอัปเดต NAV เพื่อโหลดข้อมูล</span>
+        </div>
+        <div class="nav-stat">
+          <span class="nav-stat-label">NAV ก่อนหน้า</span>
+          <strong class="nav-stat-value" id="previous-nav">-</strong>
+          <span class="nav-stat-detail" id="previous-nav-date">แสดงเมื่อดึงข้อมูลสำเร็จ</span>
+        </div>
+        <div class="nav-stat change-neutral" id="nav-change-stat">
+          <span class="nav-stat-label">เปลี่ยนแปลงจาก NAV ก่อนหน้า</span>
+          <strong class="nav-stat-value" id="nav-change">-</strong>
+          <span class="nav-stat-detail" id="nav-change-percent">รอข้อมูลเพื่อคำนวณ</span>
+        </div>
+      </div>
+      <p class="nav-status" id="nav-comparison-status" role="status" aria-live="polite">กดปุ่มอัปเดต NAV เพื่อเปรียบเทียบข้อมูล</p>
     </section>
 
     <aside class="guidance" aria-labelledby="guidance-title">
@@ -365,6 +468,7 @@
       const money = new Intl.NumberFormat("th-TH", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       const precise = new Intl.NumberFormat("th-TH", { minimumFractionDigits: 0, maximumFractionDigits: 4 });
       const navButton = output("refresh-nav");
+      const navStatsButton = output("refresh-nav-stats");
       const navStatus = output("nav-status");
       const buyPriceAtCurrent = output("buy-price-at-current");
 
@@ -412,30 +516,68 @@
           .format(new Date(Number(parts[1]), Number(parts[2]) - 1, Number(parts[3])));
       }
 
+      function clearNavComparison(message = "กดปุ่มอัปเดต NAV เพื่อเปรียบเทียบข้อมูล") {
+        show("latest-nav", "-");
+        show("latest-nav-date", "รอข้อมูล NAV ล่าสุด");
+        show("previous-nav", "-");
+        show("previous-nav-date", "รอข้อมูล NAV ก่อนหน้า");
+        show("nav-change", "-");
+        show("nav-change-percent", "รอข้อมูลเพื่อคำนวณ");
+        output("nav-change-stat").className = "nav-stat change-neutral";
+        show("nav-comparison-status", message);
+      }
+
       async function refreshNav() {
         navButton.disabled = true;
+        navStatsButton.disabled = true;
         navStatus.className = "nav-status";
         navStatus.textContent = "กำลังดึง NAV ล่าสุด...";
+        show("nav-comparison-status", "กำลังดึง NAV ล่าสุดและ NAV ก่อนหน้า...");
         try {
           const response = await fetch(`/api/nav?fund=${encodeURIComponent(activeFund.apiFundId)}`, { cache: "no-store", headers: { Accept: "application/json" } });
           const data = await response.json().catch(() => ({}));
           if (!response.ok) throw new Error(data.error || "ดึง NAV ไม่สำเร็จ");
           const nav = Number(data.nav);
           if (!Number.isFinite(nav) || nav <= 0) throw new Error("ข้อมูล NAV ที่ได้รับไม่ถูกต้อง");
+          const previousNav = data.previousNav === null ? null : Number(data.previousNav);
 
           fields.currentPrice.value = String(nav);
           if (buyPriceAtCurrent.checked) fields.buyPrice.value = String(nav);
           render();
           save();
+          show("latest-nav", `${precise.format(nav)} บาท`);
+          show("latest-nav-date", `ข้อมูล ณ ${formatNavDate(data.navDate)}`);
+          if (Number.isFinite(previousNav) && previousNav > 0) {
+            const change = nav - previousNav;
+            const changePercent = (change / previousNav) * 100;
+            const prefix = change > 0 ? "+" : "";
+            show("previous-nav", `${precise.format(previousNav)} บาท`);
+            show("previous-nav-date", `ข้อมูล ณ ${formatNavDate(data.previousNavDate)}`);
+            show("nav-change", `${prefix}${precise.format(change)} บาท`);
+            show("nav-change-percent", `${prefix}${money.format(changePercent)}% เทียบกับ NAV ก่อนหน้า`);
+            output("nav-change-stat").className = `nav-stat ${change > 0 ? "change-positive" : change < 0 ? "change-negative" : "change-neutral"}`;
+            show("nav-comparison-status", `เปรียบเทียบ NAV ของ ${activeFund.name} กับข้อมูลก่อนหน้าที่ SEC รายงาน`);
+          } else {
+            show("previous-nav", "ไม่มีข้อมูล");
+            show("previous-nav-date", "ไม่พบข้อมูล NAV ก่อนหน้าในช่วงที่ค้นหา");
+            show("nav-change", "—");
+            show("nav-change-percent", "ยังคำนวณการเปลี่ยนแปลงไม่ได้");
+            output("nav-change-stat").className = "nav-stat change-neutral";
+            show("nav-comparison-status", `ได้รับ NAV ล่าสุดของ ${activeFund.name} แต่ไม่พบข้อมูลก่อนหน้า`);
+          }
           navStatus.className = "nav-status success";
           navStatus.textContent = `NAV ${precise.format(nav)} บาท · ข้อมูล ณ ${formatNavDate(data.navDate)}`;
         } catch (error) {
+          show("nav-comparison-status", error instanceof TypeError
+            ? "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ตรวจว่าเปิดด้วย node server.js"
+            : error.message);
           navStatus.className = "nav-status error";
           navStatus.textContent = error instanceof TypeError
             ? "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ตรวจว่าเปิดด้วย node server.js"
             : error.message;
         } finally {
           navButton.disabled = false;
+          navStatsButton.disabled = false;
         }
       }
 
@@ -526,7 +668,9 @@
         activeFund = funds[activeFundId];
         defaults = activeFund.defaults;
         document.getElementById("page-title").textContent = activeFund.name;
+        clearNavComparison();
         navButton.hidden = !activeFund.apiFundId;
+        navStatsButton.hidden = !activeFund.apiFundId;
         navStatus.className = "nav-status";
         navStatus.textContent = activeFund.apiFundId ? "กดเพื่อดึง NAV ล่าสุดจาก SEC" : "กรอก NAV ปัจจุบันด้วยตนเอง";
         output("save-status").textContent = "ค่าที่แก้จะบันทึกไว้ในเครื่อง";
@@ -535,6 +679,321 @@
         } catch {}
         load();
         render();
+      }
+
+      const analysisFields = Array.from(document.querySelectorAll("[data-analysis-key]"));
+      const analysisScoreFormat = new Intl.NumberFormat("th-TH", { maximumFractionDigits: 1 });
+      const analysisDataFormat = new Intl.NumberFormat("th-TH", { useGrouping: false, maximumFractionDigits: 2 });
+      analysisFields.forEach((field) => {
+        if (field.tagName === "SELECT") field.dataset.emptyLabel = field.options[0].textContent;
+      });
+
+      function readAnalysisValues() {
+        return Object.fromEntries(analysisFields.map((field) => [field.dataset.analysisKey, field.value.trim()]));
+      }
+
+      function getAnalysisNumber(values, key) {
+        if (values[key] === "") return null;
+        const value = Number(values[key]);
+        return Number.isFinite(value) ? value : null;
+      }
+
+      function getAnalysisFieldDetail(...keys) {
+        return keys.map((key) => {
+          const field = analysisFields.find((item) => item.dataset.analysisKey === key);
+          const hint = field?.closest(".analysis-field")?.querySelector(".analysis-field-hint")?.textContent;
+          const value = field?.tagName === "SELECT" ? field.selectedOptions[0]?.textContent : field?.value;
+          return [value, hint].filter(Boolean).join(" · ");
+        }).filter(Boolean).join(" | ");
+      }
+
+      function getQualityScores(values) {
+        const volatility = getAnalysisNumber(values, "volatility");
+        const ter = getAnalysisNumber(values, "ter");
+        const aum = getAnalysisNumber(values, "aum");
+        const trackRecord = getAnalysisNumber(values, "trackRecord");
+        const hedge = getAnalysisNumber(values, "hedge");
+        const aumScore = aum === null || aum < 0 ? null : aum > 10 ? 10 : aum >= 5 ? 8 : aum >= 1 ? 6 : 4;
+        const trackScore = trackRecord === null || trackRecord < 0 ? null : trackRecord > 10 ? 10 : trackRecord >= 5 ? 8 : trackRecord >= 3 ? 6 : 4;
+        const trackAndScaleScore = aumScore === null || trackScore === null ? null : (aumScore + trackScore) / 2;
+        const hedgeScore = hedge === null || hedge < 0 || hedge > 100 ? null : hedge === 100 ? 10 : hedge >= 75 ? 8 : hedge >= 50 ? 6 : hedge === 0 ? 3 : 4;
+        const factors = [
+          { name: "1. วัตถุประสงค์และโครงสร้าง", score: getAnalysisNumber(values, "objective"), maximum: 10, detail: getAnalysisFieldDetail("objective") },
+          { name: "2. คุณภาพสินทรัพย์อ้างอิง", score: getAnalysisNumber(values, "exposure"), maximum: 10, detail: getAnalysisFieldDetail("exposure") },
+          { name: "3. ความเสี่ยงและความผันผวน", score: volatility === null || volatility < 0 ? null : volatility < 12 ? 10 : volatility <= 15 ? 8 : volatility <= 20 ? 7 : volatility <= 25 ? 5 : 3, maximum: 10, detail: getAnalysisFieldDetail("volatility") },
+          { name: "4. ประสิทธิภาพด้านต้นทุน", score: ter === null || ter < 0 ? null : ter < 0.25 ? 10 : ter <= 0.5 ? 8 : ter <= 1 ? 7 : ter <= 1.5 ? 5 : 3, maximum: 10, detail: getAnalysisFieldDetail("ter") },
+          { name: "5. ขนาดและประวัติกองทุน", score: trackAndScaleScore, maximum: 10, detail: getAnalysisFieldDetail("aum", "trackRecord") },
+          { name: "6. การจัดการความเสี่ยงค่าเงิน", score: hedgeScore, maximum: 10, detail: getAnalysisFieldDetail("hedge") },
+        ];
+        const completed = factors.filter((factor) => factor.score !== null && factor.score >= 0 && factor.score <= 10).length;
+        return { factors, completed, complete: completed === factors.length, total: completed === factors.length ? factors.reduce((sum, factor) => sum + factor.score, 0) : null };
+      }
+
+      function getEntryScores(values) {
+        const drawdown = getAnalysisNumber(values, "drawdown");
+        const vix = getAnalysisNumber(values, "vix");
+        const drawdownScore = drawdown === null || drawdown < 0 || drawdown > 100 ? null : drawdown >= 30 ? 40 : drawdown >= 20 ? 32 : drawdown >= 10 ? 24 : drawdown >= 5 ? 16 : 8;
+        const vixScore = vix === null || vix < 0 || vix > 35 ? null : vix >= 25 ? 30 : vix >= 20 ? 24 : vix >= 15 ? 20 : vix >= 10 ? 12 : 6;
+        const factors = [
+          { name: "1. โอกาสจากการปรับฐาน", score: drawdownScore, maximum: 40, detail: getAnalysisFieldDetail("drawdown") },
+          { name: "2. สุขภาพแนวโน้มราคา", score: getAnalysisNumber(values, "trend"), maximum: 30, detail: getAnalysisFieldDetail("trend") },
+          { name: "3. ความผันผวนและความกังวล", score: vixScore, maximum: 30, detail: getAnalysisFieldDetail("vix") }
+        ];
+        const completed = factors.filter((factor) => factor.score !== null).length;
+        const availableTotal = factors.reduce((sum, factor) => sum + (factor.score === null ? 0 : factor.score), 0);
+        const availableMaximum = factors.reduce((sum, factor) => sum + (factor.score === null ? 0 : factor.maximum), 0);
+        const missingMaximum = factors.reduce((sum, factor) => sum + (factor.score === null ? factor.maximum : 0), 0);
+        return {
+          factors,
+          completed,
+          complete: completed === factors.length,
+          total: completed === factors.length ? availableTotal : null,
+          availableTotal,
+          availableMaximum,
+          missingMaximum
+        };
+      }
+
+      function renderScoreBreakdown(listId, factors, maximum) {
+        const list = output(listId);
+        list.replaceChildren(...factors.map((factor) => {
+          const item = document.createElement("li");
+          item.className = "score-row";
+          const factorDetails = document.createElement("div");
+          factorDetails.className = "score-factor";
+          const label = document.createElement("span");
+          label.className = "score-name";
+          label.textContent = factor.name;
+          const detail = document.createElement("small");
+          detail.className = "score-detail";
+          detail.textContent = factor.detail || "ไม่มีข้อมูลจากแหล่งข้อมูลที่เชื่อมต่อ";
+          factorDetails.append(label, detail);
+          const score = document.createElement("span");
+          score.className = "score-value";
+          score.textContent = factor.score === null ? "รอข้อมูล" : `${analysisScoreFormat.format(factor.score)} / ${factor.maximum || maximum}`;
+          item.append(factorDetails, score);
+          return item;
+        }));
+      }
+
+      function qualityBand(score) {
+        if (score < 18) return "อ่อน";
+        if (score < 30) return "ต่ำกว่าค่าเฉลี่ย";
+        if (score < 42) return "พอใช้";
+        if (score < 52.3) return "แข็งแกร่ง";
+        return "ยอดเยี่ยม";
+      }
+
+      function entryBand(score) {
+        if (score <= 30) return "จังหวะไม่ดี";
+        if (score <= 50) return "ค่อนข้างอ่อน";
+        if (score <= 70) return "เป็นกลาง";
+        if (score <= 85) return "น่าสนใจ";
+        return "น่าสนใจมาก";
+      }
+
+      function renderAnalysis() {
+        const values = readAnalysisValues();
+        const quality = getQualityScores(values);
+        const entry = getEntryScores(values);
+        show("quality-score", quality.complete ? analysisScoreFormat.format(quality.total) : "-");
+        show("quality-progress", `${quality.completed}/6 ปัจจัย`);
+        show("quality-band", quality.complete ? qualityBand(quality.total) : `ข้อมูลไม่ครบ · ${quality.completed}/6 ปัจจัย`);
+        show("entry-score", entry.completed ? String(entry.availableTotal) : "-");
+        show("entry-maximum", entry.completed ? String(entry.availableMaximum) : "100");
+        show("entry-progress", `${entry.completed}/3 ปัจจัย${getAnalysisNumber(values, "vix") > 35 ? " · VIX เกินช่วงคะแนน" : ""}`);
+        show("entry-band", entry.complete ? entryBand(entry.total) : entry.completed ? "รอข้อมูล · คะแนนชั่วคราว" : "รอข้อมูล");
+        renderScoreBreakdown("quality-breakdown", quality.factors, 10);
+        renderScoreBreakdown("entry-breakdown", entry.factors, 40);
+
+        let recommendation = "รอข้อมูล";
+        let detail = "กรอกเกณฑ์เพื่อดูผลประเมิน";
+        let result = "คะแนนนี้เป็นเครื่องมือจัดระเบียบข้อมูล ไม่ใช่คำแนะนำการลงทุน";
+        if (quality.complete && quality.total < 38.6) {
+          recommendation = "หลีกเลี่ยง";
+          detail = "คะแนนคุณภาพต่ำกว่า 38.6/60 ตาม Decision Matrix";
+          result = "คะแนนคุณภาพต่ำกว่า 38.6/60 จึงเข้าเกณฑ์หลีกเลี่ยง โดยไม่ขึ้นกับคะแนนจังหวะเข้าลงทุน";
+        } else if (quality.complete && quality.total < 47.2) {
+          recommendation = "ยังไม่ระบุแนวทาง";
+          detail = `คุณภาพ ${quality.total}/60 อยู่ในช่วง 38.6 ถึงต่ำกว่า 47.2 ซึ่งไม่มีแนวทางใน Decision Matrix`;
+          result = entry.completed
+            ? `Algorithm B มี ${entry.availableTotal}/${entry.availableMaximum} คะแนนจากปัจจัยที่พร้อม; เมื่อข้อมูลครบ คะแนนอาจอยู่ที่ ${entry.availableTotal}-${entry.availableTotal + entry.missingMaximum}/100 แต่ Decision Matrix ยังไม่กำหนดแนวทางสำหรับคุณภาพช่วงนี้`
+            : "Decision Matrix ยังไม่กำหนดแนวทางสำหรับคะแนนคุณภาพช่วง 38.6 ถึงต่ำกว่า 47.2";
+        } else if (!quality.complete || !entry.complete) {
+          recommendation = "รอข้อมูล";
+          detail = entry.completed
+            ? `คะแนนจังหวะเข้าลงทุนชั่วคราว ${entry.availableTotal}/${entry.availableMaximum} (${entry.completed}/3 ปัจจัย)`
+            : "ยังไม่มีข้อมูลเพียงพอสำหรับคำนวณคะแนนจังหวะเข้าลงทุน";
+          result = entry.completed
+            ? `คะแนนจังหวะเข้าลงทุนที่ทราบคือ ${entry.availableTotal}/${entry.availableMaximum}; เมื่อข้อมูลครบ คะแนนอาจอยู่ที่ ${entry.availableTotal}-${entry.availableTotal + entry.missingMaximum}/100 แล้วจึงคำนวณ Decision Matrix`
+            : "ยังไม่มีปัจจัยเพียงพอสำหรับคำนวณคะแนนจังหวะเข้าลงทุน";
+        } else if (quality.total >= 47.2 && entry.total >= 75) {
+          recommendation = "ผู้สมัคร Strong Buy";
+          detail = "คุณภาพอย่างน้อย 47.2/60 และจังหวะเข้าลงทุนอย่างน้อย 75";
+          result = "เข้าเกณฑ์ Strong Buy Candidate ตาม Decision Matrix ที่กำหนด โปรดตรวจสอบความถูกต้องและวันที่ของข้อมูล";
+        } else if (quality.total >= 47.2 && entry.total >= 60) {
+          recommendation = "ทยอยลงทุนปกติ";
+          detail = "คุณภาพอย่างน้อย 47.2/60 และจังหวะเข้าลงทุนอยู่ระหว่าง 60 ถึงต่ำกว่า 75";
+          result = "เข้าเกณฑ์ Normal DCA ตาม Decision Matrix ที่กำหนด ไม่ได้หมายถึงการรับรองผลตอบแทน";
+        } else if (quality.total >= 47.2) {
+          recommendation = "ถือ / ชะลอ DCA";
+          detail = "คุณภาพอย่างน้อย 47.2/60 แต่คะแนนจังหวะเข้าลงทุนต่ำกว่า 60";
+          result = "เข้าเกณฑ์ Hold / Slow DCA ตาม Decision Matrix ที่กำหนด";
+        }
+        show("analysis-recommendation", recommendation);
+        show("analysis-recommendation-detail", detail);
+        show("analysis-result", result);
+      }
+
+      function loadAnalysis() {
+        const requestId = ++analysisRequestId;
+        const refreshButton = output("reset-analysis");
+        currentAnalysis = null;
+        analysisFields.forEach((field) => {
+          if (field.tagName === "SELECT") {
+            field.options[0].textContent = "กำลังโหลดข้อมูล...";
+            field.value = "";
+          } else {
+            field.value = "กำลังโหลดข้อมูล...";
+          }
+        });
+        refreshButton.disabled = true;
+        show("analysis-data-status", `กำลังโหลดข้อมูลของ ${activeFund.name}...`);
+        renderAnalysis();
+
+        (async () => {
+          try {
+            const response = await fetch(`/api/fund-analysis?fund=${encodeURIComponent(activeFundId)}`, {
+              cache: "no-store",
+              headers: { Accept: "application/json" }
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(data.error || "ดึงข้อมูลกองทุนไม่สำเร็จ");
+            if (requestId !== analysisRequestId || data.fundId !== activeFundId) return;
+
+            currentAnalysis = data;
+            populateAnalysis(data);
+            renderAnalysis();
+            show("market-data-source", data.market?.sheetSource || "Yahoo Finance");
+            const sourceDates = [
+              data.sec?.asOfDate && `SEC ${formatNavDate(data.sec.asOfDate.slice(0, 10))}`,
+              data.market?.benchmarkAsOfDate && `ตลาด ${formatNavDate(data.market.benchmarkAsOfDate)}`,
+              data.market?.vixAsOfDate && `VIX ${formatNavDate(data.market.vixAsOfDate)}`,
+              data.market?.sheetSource && `${data.market.sheetSource}${data.market.sheetAsOfDate ? ` ${formatNavDate(data.market.sheetAsOfDate)}` : ""}`
+            ].filter(Boolean).join(" · ");
+            const warnings = data.errors?.length ? ` · บางแหล่งไม่พร้อม: ${data.errors.join(", ")}` : "";
+            show("quality-data-date", data.sec?.asOfDate ? `ปรับปรุง ${formatNavDate(data.sec.asOfDate)}` : "ไม่มีวันที่ข้อมูล");
+            show("market-data-date", sourceDates || "ไม่มีวันที่ข้อมูลตลาด");
+            show("analysis-data-status", `${sourceDates || "ได้รับข้อมูลบางส่วน"}${warnings}`);
+          } catch (error) {
+            if (requestId !== analysisRequestId) return;
+            analysisFields.forEach((field) => {
+              if (field.tagName === "SELECT") {
+                field.options[0].textContent = "แหล่งข้อมูลไม่พร้อม";
+                field.value = "";
+              } else {
+                field.value = "แหล่งข้อมูลไม่พร้อม";
+              }
+            });
+            renderAnalysis();
+            show("quality-data-date", "แหล่งข้อมูลไม่พร้อม");
+            show("market-data-date", "แหล่งข้อมูลไม่พร้อม");
+            show("analysis-data-status", error instanceof TypeError
+              ? "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ตรวจว่าเปิดด้วย node server.js"
+              : error.message);
+          } finally {
+            if (requestId === analysisRequestId) refreshButton.disabled = false;
+          }
+        })();
+      }
+
+      function setAnalysisField(key, value, hint, unavailableText = "ไม่มีข้อมูลจากแหล่งข้อมูลสาธารณะ") {
+        const field = analysisFields.find((item) => item.dataset.analysisKey === key);
+        if (!field) return;
+        if (field.tagName === "SELECT") {
+          field.options[0].textContent = value === null || value === undefined
+            ? unavailableText
+            : field.dataset.emptyLabel;
+          field.value = value === null || value === undefined ? "" : String(value);
+        } else {
+          field.value = value === null || value === undefined
+            ? unavailableText
+            : Number.isFinite(Number(value)) ? analysisDataFormat.format(Number(value)) : String(value);
+        }
+        const hintElement = field.closest(".analysis-field")?.querySelector(".analysis-field-hint");
+        if (hintElement && hint) hintElement.textContent = hint;
+      }
+
+      function populateAnalysis(data) {
+        const profile = data.sec?.profile || {};
+        const stats = data.sec?.statistics || {};
+        const market = data.market || {};
+        const benchmarkText = [data.sec?.benchmark, profile.masterFund, data.fundName, profile.investmentPolicy]
+          .filter(Boolean).join(" ").replace(/&amp;/gi, "&");
+        let objectiveScore = null;
+        let exposureScore = null;
+        if (/msci\s*world|\bacwi\b/i.test(benchmarkText)) {
+          objectiveScore = 9.5;
+          exposureScore = 10;
+        } else if (/s\s*&\s*p\s*500/i.test(benchmarkText)) {
+          objectiveScore = 9;
+          exposureScore = 9;
+        } else if (/nasdaq[\s-]*100/i.test(benchmarkText)) {
+          objectiveScore = 8;
+          exposureScore = 8;
+        } else if (/nikkei\s*225|topix|msci\s*japan/i.test(benchmarkText)) {
+          objectiveScore = 7;
+          exposureScore = 7;
+        } else if (/digital|disruptive technology|single theme|ธีมเดียว/i.test(benchmarkText)) {
+          objectiveScore = 5;
+          exposureScore = 4;
+        }
+
+        const inceptionDate = profile.inceptionDate ? new Date(`${profile.inceptionDate}T00:00:00`) : null;
+        const trackRecord = inceptionDate && Number.isFinite(inceptionDate.getTime())
+          ? Math.max(0, (Date.now() - inceptionDate.getTime()) / (365.25 * 24 * 60 * 60 * 1000)) : null;
+        const aum = Number.isFinite(data.sec?.aumThb) ? data.sec.aumThb / 1e9 : null;
+        const marketPrice = market.trendPrice ?? market.benchmarkPrice;
+        const sma50 = market.sma50;
+        const sma200 = market.sma200;
+        const trendScore = Number.isFinite(marketPrice) && Number.isFinite(sma50) && Number.isFinite(sma200)
+          ? marketPrice > sma50 && sma50 > sma200 ? 30 : marketPrice > sma200 ? 20 : marketPrice < sma200 ? 10 : null
+          : null;
+        const benchmark = data.sec?.benchmark || market.benchmarkName || "ไม่พบดัชนีชี้วัด";
+        const master = profile.masterFund ? ` · กองทุนหลัก ${profile.masterFund}` : "";
+        const dataDate = data.sec?.asOfDate ? ` · SEC ${formatNavDate(data.sec.asOfDate.slice(0, 10))}` : "";
+        const marketSource = `${market.benchmarkName || benchmark}${market.ticker ? ` (${market.ticker})` : ""}${market.isProxy ? " · proxy" : ""}`;
+        const trendSource = market.trendTicker || marketSource;
+
+        setAnalysisField("objective", objectiveScore,
+          `${benchmark}${master} · รูปแบบ ${profile.managementStyle || "ไม่ระบุ"}${dataDate}`,
+          `ไม่มีช่วงคะแนนในแผนสำหรับ ${market.benchmarkName || benchmark}`);
+        setAnalysisField("exposure", exposureScore,
+          `${benchmark}${master} · ${data.sec?.holdings?.[0]?.name || "ไม่มีข้อมูลสินทรัพย์หลัก"}${dataDate}`,
+          `ไม่มีช่วงคะแนนในแผนสำหรับ ${market.benchmarkName || benchmark}`);
+        setAnalysisField("volatility", data.sec?.volatilityPercent,
+          `SEC factsheet 5 ปี${data.sec?.volatilityAsOfDate ? ` · ${formatNavDate(data.sec.volatilityAsOfDate)}` : ""}${Number.isFinite(stats.maxDrawdownPercent) ? ` · Max Drawdown ${analysisDataFormat.format(stats.maxDrawdownPercent)}%` : ""}`);
+        setAnalysisField("ter", data.sec?.totalFeePercent,
+          `SEC Total Fee and Expense · actual ใช้เทียบ TER${data.sec?.feeAsOfDate ? ` · ${formatNavDate(data.sec.feeAsOfDate)}` : ""}`);
+        setAnalysisField("aum", aum,
+          `SEC NAV ${data.sec?.navAsOfDate ? `· ${formatNavDate(data.sec.navAsOfDate)}` : "· ไม่มีวันที่"} · ${data.sec?.nav ? `NAV ${data.sec.nav} บาท/หน่วย` : "ไม่มี NAV"}`);
+        setAnalysisField("trackRecord", trackRecord,
+          `จัดตั้ง ${profile.inceptionDate ? formatNavDate(profile.inceptionDate) : "ไม่ระบุ"}`);
+        setAnalysisField("hedge", stats.hedgePercent,
+          `SEC factsheet${stats.asOfDate ? ` · ${formatNavDate(stats.asOfDate)}` : ""} · ${profile.currencyHedgePolicy || "ไม่มีนโยบายที่รายงาน"}`);
+        setAnalysisField("drawdown", market.drawdownPercent,
+          `${marketSource} · ณ ${market.benchmarkAsOfDate ? formatNavDate(market.benchmarkAsOfDate) : "ไม่ระบุ"}`,
+          market.isProxy ? "ไม่ใช้ ATH ของ proxy ที่มีประวัติราคาไม่เทียบเคียง" : "ไม่มีประวัติ ATH จากแหล่งข้อมูลที่เชื่อมต่อ");
+        const sheetTrend = String(market.trendTicker || "").includes("Google Sheets");
+        const sheetTrendSource = market.trendTicker === "Nikkei 225 (Google Sheets)"
+          ? "Google Sheets · Nikkei 225"
+          : market.trendTicker === "NYSEARCA:IVV (Google Sheets)" ? "Google Sheets · คอลัมน์ B-D (IVV)" : "Google Sheets";
+        setAnalysisField("trend", trendScore,
+          `${sheetTrend ? sheetTrendSource : trendSource} · ราคา ${Number.isFinite(marketPrice) ? analysisScoreFormat.format(marketPrice) : "-"} · SMA50 ${Number.isFinite(sma50) ? analysisScoreFormat.format(sma50) : "-"} · SMA200 ${Number.isFinite(sma200) ? analysisScoreFormat.format(sma200) : "-"}`,
+          "ไม่มีข้อมูลราคาและ SMA ของดัชนีชี้วัด");
+        setAnalysisField("vix", market.vix,
+          `${market.vixSource === "Google Sheets INDEXCBOE:VIX" ? "Google Sheets · คอลัมน์ H: VIX Index" : market.vixSource || "Yahoo Finance ^VIX"}${market.vixAsOfDate ? ` · ${formatNavDate(market.vixAsOfDate)}` : ""}`,
+          activeFundId === "scbnk225" && !Number.isFinite(market.vix) ? "รอข้อมูล" : undefined);
       }
 
       Object.entries(fields).forEach(([key, field]) => {
@@ -546,6 +1005,7 @@
       });
 
       navButton.addEventListener("click", refreshNav);
+      navStatsButton.addEventListener("click", refreshNav);
       buyPriceAtCurrent.addEventListener("change", () => {
         fields.buyPrice.disabled = buyPriceAtCurrent.checked;
         if (buyPriceAtCurrent.checked) fields.buyPrice.value = fields.currentPrice.value;
@@ -572,6 +1032,8 @@
       navButton.hidden = !activeFund.apiFundId;
       navStatus.textContent = activeFund.apiFundId ? "กดเพื่อดึง NAV ล่าสุดจาก SEC" : "กรอก NAV ปัจจุบันด้วยตนเอง";
       render();
+      clearNavComparison();
+      navStatsButton.hidden = !activeFund.apiFundId;
 
       if ("serviceWorker" in navigator && location.protocol !== "file:") {
         window.addEventListener("load", () => {

@@ -1,0 +1,127 @@
+plan.md
+  s_7c247f56cea815::t_ead9fa3cc85dbb 28-51
+  s_7c247f56cea815::t_2380f93d7f32de 221-226
+  s_bc9e6986a62f7b::t_a2feb9842b6daa 144-190
+  s_bc9e6986a62f7b::t_ce9290ca364502 11,122-130,206-218,231-240
+  s_bc9e6986a62f7b::t_65b63e8e1f3ea7 8-10
+  s_bc9e6986a62f7b::t_9d18743fc55775 131-133,141-143
+  s_bc9e6986a62f7b::t_e6ef175262cc76 191-193,203-205
+  s_bc9e6986a62f7b::t_45c34d4f5ff656 241-243
+index.html
+  s_bc9e6986a62f7b::t_4d9ac93a9226a0 161-167,987
+  s_7c247f56cea815::t_c92e599487ab88 743-744,746-751,754,802-803,805,823-826,995-996
+  s_7c247f56cea815::t_0016ae47215b5b 745,752-753,816-821,827-829
+  s_7c247f56cea815::t_ead9fa3cc85dbb 944-946
+  s_bc9e6986a62f7b::t_a2feb9842b6daa 960
+  s_3b593c3645283c::t_cb142623d60e56 879,891-896
+  s_796d76b7fe8abd::t_7c530b0c883811 881,956,966
+  s_796d76b7fe8abd::t_b1fe8a6562b4f9 882
+  s_34e9d609034a13::t_c8c7082f0060c6 350,471,532,580,673,1008,1036
+  s_796d76b7fe8abd::t_511d787974e20a 877
+  s_79a8de502706da::t_bc404be90a23dc 988-990,992
+  s_3b593c3645283c::t_36b4ba97f54979 172
+  s_3b593c3645283c::t_040f818999d7b6 178-182,686,919-921,964
+  s_eaec9640b45c67::t_70bc6b976c29c2 370-371
+  s_3b593c3645283c::t_b72b4cff787e11 849-876,878,880,883-889,898-905,907-918,923-924,927-943,947-949,951-955,957-959,961-963,965,967-974,976,978-986,991,993-994
+  s_34e9d609034a13::t_81d267cdf1fa5e 188-196,223-224,244-246,347-348,352-356,358-361,363-366,369
+  s_3b593c3645283c::t_6113f071477817 219
+  s_3b593c3645283c::t_8750c1ddfcede3 975,977
+  s_3b593c3645283c::t_66eb1fbec24675 701-709,721-726,762-763,765,767-770,772,774
+  s_3b593c3645283c::t_33d7e3d6e836ed 687-689
+  s_bc9e6986a62f7b::t_bb52567594bbb7 735-736,738-740,804,807
+  s_bc9e6986a62f7b::t_ce9290ca364502 780-783,800-801,812,814-815,830,832,834,836,838,840
+  s_3b593c3645283c::t_2301ea313d9eeb 144-160,168-171,173-177,183-187,197,216-218,220-222,235-243,344-346,349,351,357,362,367-368,684-685,690-700,710-720,727-734,737,741-742,755-761,764,766,771,775-779,784-799,806,808-811,813,822,831,833,835,837,839,841-848,890,897,906,922,925-926,950,997
+  s_3b593c3645283c::t_3b4ee51aa312c6 773
+  s_34e9d609034a13::t_b85d8dbf0cb0be 519-529,535,542,548-567,571-573,671,1035
+  s_3b593c3645283c::t_ea3c2388981cbd 998
+server.js
+  s_3b593c3645283c::t_2142b4cc4ec3bc 284-287,367,399-401,454
+  s_796d76b7fe8abd::t_72e0b768c5fbae 321,335,338-339,343,357-360
+  s_79a8de502706da::t_35117c872d0936 132,138,198-200,221-223
+  s_79a8de502706da::t_bc404be90a23dc 361-363,369,386-387,390-392,395-398,450-451
+  s_3b593c3645283c::t_a85645b22ec084 11-12,237,239-271,273-283,288-320,322-334,336-337,340-342,344-356,364-366,370-373,375-376,380-383,402,407-448,453,455,458,464-471,578-583
+  s_796d76b7fe8abd::t_c1c22438ab2087 61-84,113-131,133-137,139-140,160,163,229,231,234-236,562-569,584-585
+  s_34e9d609034a13::t_81d267cdf1fa5e 486,488-489,493-495,533,535-537,541,553-554
+  s_7c247f56cea815::t_2c34f65e7397a6 181-183
+  s_796d76b7fe8abd::t_e64fab454f1297 141-159,161-162,164,166-172,205-213,218-220,224-228,230,232-233,374,377-379,385,449,456-457
+  s_796d76b7fe8abd::t_b1fe8a6562b4f9 165,173-180,184-197,201-204,214-217,272,384,388-389,393-394,452,462-463
+  s_7c247f56cea815::t_048209a2ab3fda 368,403-406,459-461
+  s_3b593c3645283c::t_b57437ad2e0fc8 238
+google-sheets.md
+  s_796d76b7fe8abd::t_b1fe8a6562b4f9 26
+  s_796d76b7fe8abd::t_da98280f5ef7c7 1-18,21-24,29-33
+  s_79a8de502706da::t_bc404be90a23dc 19-20
+  s_7c247f56cea815::t_048209a2ab3fda 25,27
+  s_796d76b7fe8abd::t_b750ede41ef38a 28
+service-worker.js
+  s_34e9d609034a13::t_fe75dd145226cb 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.3",
+  "base_commit_sha": "8b06de1db903ee1d42767c3d5495adfe8297b115",
+  "prompts": {},
+  "humans": {
+    "h_2a958ada244ba1": {
+      "author": "Norawich Terakamjay <norawich.ter@axonstech.com>"
+    }
+  },
+  "sessions": {
+    "s_34e9d609034a13": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "c41879e3-3de1-42ff-be61-866ea3acdb51",
+        "model": "copilot/gpt-6-luna"
+      },
+      "human_author": "Norawich Terakamjay <norawich.ter@axonstech.com>"
+    },
+    "s_3b593c3645283c": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "702eaa9f-d79e-48ca-a3ff-297ee828ea21",
+        "model": "copilot/gpt-6-luna"
+      },
+      "human_author": "Norawich Terakamjay <norawich.ter@axonstech.com>"
+    },
+    "s_796d76b7fe8abd": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "e086dd78-32a3-4828-8d6b-ca36377a3837",
+        "model": "copilot/gpt-6-luna"
+      },
+      "human_author": "Norawich Terakamjay <norawich.ter@axonstech.com>"
+    },
+    "s_79a8de502706da": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "15e66d10-5650-45c8-a7ed-c9a9235e96f0",
+        "model": "copilot/gpt-6-luna"
+      },
+      "human_author": "Norawich Terakamjay <norawich.ter@axonstech.com>"
+    },
+    "s_7c247f56cea815": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "ec978ab5-181b-437d-ad5a-d9dc7b06529e",
+        "model": "copilot/gpt-6-luna"
+      },
+      "human_author": "Norawich Terakamjay <norawich.ter@axonstech.com>"
+    },
+    "s_bc9e6986a62f7b": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "8f50eea7-b7de-4f96-80d4-4d1da4a57c85",
+        "model": "copilot/gpt-6-luna"
+      },
+      "human_author": "Norawich Terakamjay <norawich.ter@axonstech.com>"
+    },
+    "s_eaec9640b45c67": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "9d1253d7-6768-4d3f-90b5-abb0d7846ac4",
+        "model": "customendpoint/Custom Endpoint deepseek-v4.1-flash/deepseek/deepseek-v4.1-flash/30256"
+      },
+      "human_author": "Norawich Terakamjay <norawich.ter@axonstech.com>"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+service-worker.js
+  h_2a958ada244ba1 1
+server.js
+  h_2a958ada244ba1 555-558
+index.html
+  h_2a958ada244ba1 197-203,232-233,256-258,382-390,494-495,542-633,645,661,1128-1130
+  h_2a958ada244ba1 634-635
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.3",
+  "base_commit_sha": "cfbde21ee89dd998b9e2dcf619e2b3648ab69e24",
+  "prompts": {},
+  "humans": {
+    "h_2a958ada244ba1": {
+      "author": "Norawich Terakamjay <norawich.ter@axonstech.com>"
+    }
+  }
+}

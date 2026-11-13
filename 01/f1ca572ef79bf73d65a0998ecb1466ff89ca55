@@ -1,0 +1,29 @@
+index.html
+  h_2a958ada244ba1 280,404,476-488,757-758
+service-worker.js
+  h_2a958ada244ba1 1
+server.js
+  s_be570157007988::t_0773334f7e23a5 20
+  s_be570157007988::t_f79e92a0f60d66 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.3",
+  "base_commit_sha": "01f1ca572ef79bf73d65a0998ecb1466ff89ca55",
+  "prompts": {},
+  "humans": {
+    "h_2a958ada244ba1": {
+      "author": "Norawich Terakamjay <norawich.ter@axonstech.com>"
+    }
+  },
+  "sessions": {
+    "s_be570157007988": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "570c781c-bf71-4e5d-87ea-4e1f8de6e054",
+        "model": "copilot/gpt-6-luna"
+      },
+      "human_author": "Norawich Terakamjay <norawich.ter@axonstech.com>"
+    }
+  }
+}

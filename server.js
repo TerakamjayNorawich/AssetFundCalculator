@@ -16,7 +16,8 @@ const navFunds = {
   "kjpx-aa": { projId: "M0074_2558", fundClassName: "K-JPX-A(A)" },
   "scbsp500a": { projId: "M0643_2555", fundClassName: "SCBS&P500A" },
   "scbrmdigi-a": { projId: "M0457_2565", fundClassName: "SCBRMDIGI(A)" },
-  "k-usxndq-aa": { projId: "M0369_2555", fundClassName: "K-USXNDQ-A(A)" }
+  "k-usxndq-aa": { projId: "M0369_2555", fundClassName: "K-USXNDQ-A(A)" },
+  "b-innotechrmf": { projId: "M0213_2561", fundClassName: "main" }
 };
 const staticFiles = new Map([
   ["/", ["index.html", "text/html; charset=utf-8"]],

@@ -277,6 +277,7 @@
             <option value="scbsp500a">SCBS&amp;P500A</option>
             <option value="scbrmdigi-a">SCBRMDIGI(A)</option>
             <option value="k-usxndq-aa">K-USXNDQ-A(A)</option>
+            <option value="b-innotechrmf">B-INNOTECHRMF</option>
           </select>
         </div>
         <h1 id="page-title">SCBNK225</h1>
@@ -400,7 +401,7 @@
     </aside>
 
     <footer>
-      <span>SCBNK225, K-JPX-A(A), SCBS&amp;P500A, SCBRMDIGI(A) และ K-USXNDQ-A(A) ดึง NAV จาก SEC เมื่อกดอัปเดต</span>
+      <span>กองทุนที่รองรับดึง NAV จาก SEC เมื่อกดอัปเดต รวมถึง B-INNOTECHRMF</span>
       <span>ข้อมูลส่วนตัวจัดเก็บในเบราว์เซอร์บนอุปกรณ์นี้</span>
     </footer>
   </main>
@@ -468,6 +469,19 @@
           defaults: {
             units: "285.2432",
             average: "35.0578",
+            currentPrice: "",
+            buyAmount: "0",
+            buyPrice: ""
+          }
+        },
+        "b-innotechrmf": {
+          name: "B-INNOTECHRMF",
+          storageKey: "b-innotechrmf-calculator-v1",
+          reportedCost: null,
+          apiFundId: "b-innotechrmf",
+          defaults: {
+            units: "",
+            average: "",
             currentPrice: "",
             buyAmount: "0",
             buyPrice: ""
@@ -740,7 +754,8 @@
           gainLine.textContent = "กรอก NAV ปัจจุบันเพื่อคำนวณมูลค่าและกำไร/ขาดทุน";
           gainLine.className = "gain-line neutral";
         }
-        show("cost-note", `ต้นทุนรวมหลังซื้อจำลอง ${money.format(totalCost)} บาท (หน่วยเดิม × ต้นทุนเฉลี่ย = ${money.format(initialCostBasis)} บาท; ต้นทุนที่แจ้งไว้ ${money.format(activeFund.reportedCost)} บาท)`);
+        const reportedCostNote = activeFund.reportedCost == null ? "" : `; ต้นทุนที่แจ้งไว้ ${money.format(activeFund.reportedCost)} บาท`;
+        show("cost-note", `ต้นทุนรวมหลังซื้อจำลอง ${money.format(totalCost)} บาท (หน่วยเดิม × ต้นทุนเฉลี่ย = ${money.format(initialCostBasis)} บาท${reportedCostNote})`);
 
         if (hasCurrentPrice) {
           const priceDifference = ((currentPrice - newAverage) / newAverage) * 100;
